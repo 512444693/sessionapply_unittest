@@ -83,3 +83,11 @@ HTML_DIR = ./gtest_report
 valgrind -v --tool=memcheck --leak-check=full ./server_test -l >> valReport 2>&1
 ```
 这样在执行完毕后即可以生成代码覆盖率信息也可以生成内存泄漏报告
+
+## 编译gtest/gmock
+- 由于gmock代码中包含gtest，所以只要编译gmock即可
+
+1. 进入gmock-1.7.0/make
+2. 执行命令make gmock.a（默认生成gmock_main.a，包含main函数，这个项目需要自己编译），将gmock.a静态库复制到/usr/local/lib目录下，cp gmock.a /usr/local/libgmock.a
+3. 将包含main函数的程序入口gmock-1.7.0/src/gmock-all.cc复制到需要的地方（这个示例复制到了CODE_TEST目录下）
+4. 将gmock和gtest的头文件复制到/usr/local/include目录中，cp -r gmock-1.7.0/include/gmock /usr/local/include;cp -r gtest-1.7.0/include/gtest /usr/local/include
