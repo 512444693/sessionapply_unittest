@@ -91,3 +91,9 @@ valgrind -v --tool=memcheck --leak-check=full ./server_test -l >> valReport 2>&1
 2. 执行命令make gmock.a（默认生成gmock_main.a，包含main函数，这个项目需要自己编译），将gmock.a静态库复制到/usr/local/lib目录下，cp gmock.a /usr/local/libgmock.a
 3. 将包含main函数的程序入口gmock-1.7.0/src/gmock-all.cc复制到需要的地方（这个示例复制到了CODE_TEST目录下）
 4. 将gmock和gtest的头文件复制到/usr/local/include目录中，cp -r gmock-1.7.0/include/gmock /usr/local/include;cp -r gtest-1.7.0/include/gtest /usr/local/include
+
+## 覆盖率报告
+- 在编译和链接时加入"-pthread -fprofile-arcs -ftest-coverage -g3"选项，编译后每个cpp文件会生成.gcno文件
+- 程序运行后，会生成.gcda文件
+- 使用gcov可以生成文字模式的代码覆盖率，不直观，所以使用lcov
+- 使用lcov和genhtml生成网页格式的代码覆盖率报告
