@@ -1,11 +1,11 @@
 # unittest
 
-## 介绍
-##### 功能
+## 一 介绍
+##### 1. 功能
 - **编译源代码和测试代码**
 - **生成代码覆盖率报告**
 
-##### 细节
+##### 2. 细节
 - 可生成两个可执行文件，分别是server_test和unit_test
 - server_test是开发代码编译后生成的可执行文件，可代替build.sh生成的可执行文件来执行功能测试；与build.sh生成的文件不同的是，执行过后可产生代码覆盖率信息，以便生成代码覆盖率报告
 - unit_test是CODE_TEST目录下的测试代码编译后生成的可执行文件，执行单元测试
@@ -14,7 +14,7 @@
 
 
 
-## 使用
+## 二 使用
 - 配置
 
 ```
@@ -76,7 +76,7 @@ HTML_DIR = ./gtest_report
 ```
 
 
-## 建议
+## 三 建议
 在执行功能测试时建议使用以下命令
 
 ```
@@ -84,7 +84,7 @@ valgrind -v --tool=memcheck --leak-check=full ./server_test -l >> valReport 2>&1
 ```
 这样在执行完毕后即可以生成代码覆盖率信息也可以生成内存泄漏报告
 
-## 编译gtest/gmock
+## 四 编译gtest/gmock
 - 由于gmock代码中包含gtest，所以只要编译gmock即可
 
 1. 进入gmock-1.7.0/make
@@ -92,7 +92,7 @@ valgrind -v --tool=memcheck --leak-check=full ./server_test -l >> valReport 2>&1
 3. 将包含main函数的程序入口gmock-1.7.0/src/gmock-all.cc复制到需要的地方（这个示例复制到了CODE_TEST目录下）
 4. 将gmock和gtest的头文件复制到/usr/local/include目录中，cp -r gmock-1.7.0/include/gmock /usr/local/include;cp -r gtest-1.7.0/include/gtest /usr/local/include
 
-## 覆盖率报告
+## 五 覆盖率报告
 - 在编译和链接时加入"-pthread -fprofile-arcs -ftest-coverage -g3"选项，编译后每个cpp文件会生成.gcno文件
 - 程序运行后，会生成.gcda文件
 - 使用gcov可以生成文字模式的代码覆盖率，不直观，所以使用lcov
